@@ -12,13 +12,6 @@
 #     shield: reviung41
 #
 ---
-build_args:
-  - CONFIG_LOG=y                   # Enable Zephyr logging
-  - CONFIG_ZMK_LOG_LEVEL_DBG=y     # Set ZMK debug logs (optional)
-  - CONFIG_LOG_DEFAULT_LEVEL=4     # 0=Off, 1=Error, 2=Warn, 3=Info, 4=Debug
-  - CONFIG_SERIAL=y                # Enable UART output (for USB/Serial logging)
-  - CONFIG_CONSOLE=y               # Enable console output
-  - CONFIG_UART_CONSOLE=y          # Enable UART console
 include:
   - board: nice_nano_v2 
     shield: corne_left nice_oled
