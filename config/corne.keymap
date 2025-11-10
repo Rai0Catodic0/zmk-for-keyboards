@@ -18,26 +18,23 @@
 #define THUMBS LH2 LH1 LH0 RH0 RH1 RH2
 
 / {
-
     macros {
-        rgblayer: rgblayer {
+        rgblayer1: rgblayer {
             compatible = "zmk,behavior-macro-two-param";
             #binding-cells = <2>;
             bindings =
                 <&macro_press>,
                 <&macro_param_1to1 &macro_param_2to2 &lt MACRO_PLACEHOLDER MACRO_PLACEHOLDER>,
                 <&macro_tap>,
-                <&macro_param_2to2 &rgb_ug RGB_COLOR_HSB_CMD MACRO_PLACEHOLDER>,
+                <&rgb_ug RGB_COLOR_HSB(0,100,48)>,
                 <&macro_pause_for_release>,
                 <&macro_release>,
-                <&macro_param_1to1 &mo MACRO_PLACEHOLDER>,
-                <&macro_tap>,
-                <&rgb_ug RGB_COLOR_HSB(0,0,0)>;
+                <&macro_param_1to2 &rgb_ug RGB_COLOR_HSB_CMD MACRO_PLACEHOLDER>;
 
             label = "RGBLAYER";
         };
     };
-    
+
     behaviors {
         rgb_ug: rgb_ug {
             compatible = "zmk,behavior-rgb-underglow";
@@ -87,36 +84,36 @@
         default_layer {
             bindings = <
 &kp TAB           &kp Q            &kp W            &kp E                &kp R              &kp T        &kp Y      &kp U               &kp I                 &kp O             &kp P                     &kp ESCAPE
-&kp LEFT_SHIFT    &hml LEFT_GUI A  &hml LEFT_ALT S  &hml LEFT_CONTROL D  &hml LEFT_SHIFT F  &kp G        &kp H      &hml RIGHT_SHIFT J  &hml RIGHT_CONTROL K  &hml RIGHT_ALT L  &hml RIGHT_GUI SEMICOLON  &kp SQT
+&kp LEFT_SHIFT    &hml LEFT_GUI A  &hml LEFT_ALT S  &hml LEFT_CONTROL D  &hml LEFT_SHIFT F  &kp G        &kp H      &hml RIGHT_SHIFT J  &hml RIGHT_CONTROL K  &hml RIGHT_ALT L  &hml RIGHT_GUI SEMICOLON  &kp CLCK
 &kp LEFT_CONTROL  &kp Z            &kp X            &kp C                &kp V              &kp B        &kp N      &kp M               &kp COMMA             &kp DOT           &kp FSLH                  &kp RA(W)
-                                                    &kp LEFT_COMMAND     &lt 1 DEL          &lt 2 SPACE  &lt 3 RET  &kp LEFT_ALT        &kp BACKSPACE
+                                                    &kp LA(LCTRL)        &rgblayer1 1 DEL   &lt 2 SPACE  &lt 3 RET  &kp LEFT_ALT        &kp BACKSPACE
             >;
         };
 
         lower_layer {
             bindings = <
-&kp SQT            &kp N1  &kp N2  &kp N3  &kp N4  &kp N5   &kp N6  &kp N7           &kp N8            &kp N9          &kp N0     &kp MINUS
-&kp LEFT_SHIFT     &trans  &trans  &trans  &none   &kp F12  &none   &none            &kp LEFT_BRACKET  &kp LEFT_BRACE  &kp LBKT   &kp EQUAL
-&ext_power EP_TOG  &none   &none   &none   &none   &none    &none   &none            &none             &kp APOS        &kp TILDE  &none
-                                   &none   &none   &none    &none   &kp RIGHT_SHIFT  &none
+&kp SQT            &kp N1     &kp N2  &kp N3  &kp N4  &kp N5   &kp N6  &kp N7           &kp N8  &kp N9          &kp N0           &kp MINUS
+&kp LEFT_SHIFT     &kp RA(Q)  &trans  &trans  &none   &kp F12  &none   &none            &trans  &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp EQUAL
+&ext_power EP_TOG  &kp PIPE   &none   &none   &none   &none    &none   &none            &none   &kp APOS        &kp BACKSLASH    &none
+                                      &none   &none   &none    &none   &kp RIGHT_SHIFT  &none
             >;
         };
 
         raise_layer {
             bindings = <
-&trans          &kp APOS       &kp EXCLAMATION  &kp AT_SIGN           &kp DOLLAR             &kp PERCENT  &kp HOME        &mkp LCLK       &mkp RCLK     &kp END          &trans  &trans
-&kp LEFT_SHIFT  &kp AMPERSAND  &kp ASTERISK     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp MINUS    &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &trans  &trans
-&trans          &kp DELETE     &kp KP_NUMBER_1  &kp KP_NUMBER_2       &kp KP_NUMBER_3        &kp PLUS     &trans          &trans          &trans        &trans           &trans  &trans
+&trans          &kp APOS       &kp EXCLAMATION  &kp AT_SIGN           &kp DOLLAR             &kp PERCENT  &kp HOME        &mkp LCLK       &mkp RCLK     &kp END          &kp PRINTSCREEN  &kp C_SLEEP
+&kp LEFT_SHIFT  &kp AMPERSAND  &kp ASTERISK     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp MINUS    &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &trans           &trans
+&trans          &kp DELETE     &kp KP_NUMBER_1  &kp KP_NUMBER_2       &kp KP_NUMBER_3        &kp PLUS     &trans          &trans          &trans        &trans           &trans           &trans
                                                 &trans                &trans                 &trans       &trans          &trans          &trans
             >;
         };
 
         layer_3 {
             bindings = <
-&out OUT_TOG  &kp F1      &kp F2             &kp F3           &kp F4            &kp F5  &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
-&bt BT_PRV    &bt BT_NXT  &rgb_ug RGB_EFF    &rgb_ug RGB_TOG  &trans            &trans  &trans  &trans  &trans  &trans   &trans   &trans
-&trans        &trans      &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &kp C_PLAY_PAUSE  &trans  &trans  &trans  &trans  &trans   &trans   &trans
-                                             &trans           &trans            &trans  &trans  &trans  &trans
+&out OUT_TOG  &kp F1          &kp F2             &kp F3            &kp F4           &kp F5      &kp F7    &kp F8        &kp F9          &kp F10    &kp F11  &kp F12
+&bt BT_PRV    &bt BT_NXT      &rgb_ug RGB_EFF    &rgb_ug RGB_TOG   &trans           &trans      &kp LEFT  &kp UP_ARROW  &kp DOWN_ARROW  &kp RIGHT  &trans   &trans
+&trans        &kp C_PREVIOUS  &kp C_VOLUME_DOWN  &kp K_PLAY_PAUSE  &kp C_VOLUME_UP  &kp C_NEXT  &trans    &trans        &trans          &trans     &trans   &trans
+                                                 &trans            &trans           &trans      &trans    &trans        &trans
             >;
         };
 
@@ -128,13 +125,5 @@
                                 &kp LEFT_COMMAND  &lt 1 DEL  &lt 2 SPACE  &lt 3 RET  &kp LEFT_ALT        &kp BACKSPACE
             >;
         };
-
-        extra1 { status = "reserved"; };
-
-        extra2 { status = "reserved"; };
-
-        extra3 { status = "reserved"; };
-
-        extra4 { status = "reserved"; };
     };
 };
